@@ -1,1 +1,14 @@
 A simple money was script for fivem rp server
+
+The Script is still a work in progress how ever it is current working great.
+
+will be adding a UI
+
+INSTALATION
+
+extract the file SoLo_moneywash
+drop into your resources
+add it to server.cfg
+and import table.sql file.
+
+Your done enjoy!
