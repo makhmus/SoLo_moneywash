@@ -1,5 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+-- Load Ped
 Citizen.CreateThread(function()
     local pedModel = Config.Ped.model
     local location = Config.Location
@@ -11,6 +12,13 @@ Citizen.CreateThread(function()
                 event = "moneywash:client:StartMoneyWash",
                 icon = "fas fa-dollar-sign",
                 label = "Start Money Wash",
+                job = "all",
+            },
+            {
+                type = "client",
+                event = "moneywash:client:CollectCash",
+                icon = "fas fa-dollar-sign",
+                label = "Collect Clean Cash",
                 job = "all",
             },
         },
@@ -34,15 +42,6 @@ AddEventHandler('moneywash:client:StartMoneyWash', function()
 end)
 
 RegisterNetEvent('moneywash:client:CollectCash')
-AddEventHandler('moneywash:client:CollectCash', function(totalCash)
-    local playerPed = PlayerPedId()
-    local playerCoords = GetEntityCoords(playerPed)
-    local location = Config.Location
-
-    if #(playerCoords - vector3(location.x, location.y, location.z)) < 2.5 then
-        TriggerServerEvent('moneywash:server:CollectCash', totalCash)
-    else
-        QBCore.Functions.Notify('You need to go back to the location to collect your cash.', 'error')
-    end
+AddEventHandler('moneywash:client:CollectCash', function()
+    TriggerServerEvent('moneywash:server:CollectCash')
 end)
- 
